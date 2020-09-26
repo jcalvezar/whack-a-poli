@@ -11,8 +11,13 @@ const Square = (props) => {
     console.log('jkey:',props.jkey)
     let personaje = (props.jkey % 2 == 0) ? macri : kris;
 
+    const touched = () => {
+        props.addScore();
+        props.setActualMole(13);
+    }
+
     return (
-        <TouchableOpacity onPress={(props.actualMole == props.jkey && !props.isGameOver) ? props.addScore : null }>
+        <TouchableOpacity onPress={(props.actualMole == props.jkey && !props.isGameOver) ? touched : null }>
             <View style={(props.actualMole == props.jkey) ? styles.square : styles.square2}>
                 <Image source={(props.actualMole == props.jkey) ? personaje : hueco} style={styles.mole}/>
             </View>
@@ -52,7 +57,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addScore: () => dispatch({type: 'ADD_SCORE'})
+        addScore: () => dispatch({type: 'ADD_SCORE'}),
+        setActualMole: (mole) => dispatch({type: 'SET_ACTUALMOLE', payload: mole}),
     }
 }
 

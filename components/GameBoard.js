@@ -16,6 +16,13 @@ const GameBoard = (props) => {
         //props.addScore();
     }
 
+    const restart = () => {
+        
+        props.setGameover(false);
+        setTimeLeft(props.maxTime);
+        props.resetScore();
+    }
+
     const items = []
     for(let i=0;i<12;i++) {
         items.push(<Square key={i.toString()} jkey={i}/>);
@@ -24,7 +31,7 @@ const GameBoard = (props) => {
 
     useEffect( () => {
         if (timeLeft <= 0) {
-            props.setGameover();
+            props.setGameover(true);
             return;
         }
         const id = setInterval(timer, 1000);
@@ -41,7 +48,7 @@ const GameBoard = (props) => {
             <Text style={{ fontSize: 20, }}>Time Left: {timeLeft}</Text>
             <Text style={{ fontSize: 20, }}>Score: {props.score}</Text>
             <View style={styles.game}>
-                { props.isGameOver ? items : <Button title="Restart"/> }
+                { !props.isGameOver ? items : <Button title="Restart" onPress={restart}/> }
             </View>
         </ImageBackground>
     )
@@ -58,6 +65,7 @@ const styles = StyleSheet.create({
       flexWrap: 'wrap',
       width: 300,
       paddingTop: 20,
+      alignItems: 'center',
     }
   });
 
@@ -72,9 +80,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setGameover: () => dispatch({type: 'SET_GAMEOVER'}),
+        setGameover: (estado) => dispatch({type: 'SET_GAMEOVER', payload: estado}),
         setActualMole: (mole) => dispatch({type: 'SET_ACTUALMOLE', payload: mole}),
-        addScore: () => dispatch({type: 'ADD_SCORE'})
+        addScore: () => dispatch({type: 'ADD_SCORE'}),
+        resetScore: () => dispatch({type: 'RESET_SCORE'})
     }
 }
 

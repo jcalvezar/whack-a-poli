@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 
 const initState = {
-    maxTime: 30,
+    maxTime: 10,
     isGameOver: false,
     actualMole: 0,
     score: 0
@@ -15,9 +15,13 @@ const myReducer = (state = initState, action) => {
             ...state,
             score: state.score + 1
         }
+        case 'RESET_SCORE': return {
+            ...state,
+            score: 0
+        }
         case 'SET_GAMEOVER': return {
             ...state,
-            isGameOver: true
+            isGameOver: action.payload
         }
         case 'SET_ACTUALMOLE': return {
             ...state,
