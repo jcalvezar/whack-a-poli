@@ -1,4 +1,4 @@
-import * as tipos from './actionTypes'
+import { ADD_SCORE, SET_GAMEOVER, SET_ACTUALMOLE } from './actionTypes'
 const initialState = {
     maxTime: 5,
     isGameOver: false,
@@ -9,15 +9,17 @@ const initialState = {
 const gameReducer = (state = initialState, action) => {
 
     switch(action.type) {
-        case tipos.ADD_SCORE: return {
+        case ADD_SCORE: return {
             ...state,
             score: state.score + 1
             }
-        case tipos.SET_GAMEOVER: return {
+        case SET_GAMEOVER: return {
             ...state,
             isGameOver: true
         }
-        case tipos.SET_ACTUALMOLE: return {
+        case SET_ACTUALMOLE: 
+            console.log('REDUCER: ',action.payload);
+            return {
             ...state,
             actualMole: action.payload
         }
@@ -25,4 +27,4 @@ const gameReducer = (state = initialState, action) => {
     }
 }
 
-export default gameReducer
+export default gameReducer;

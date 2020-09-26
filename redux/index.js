@@ -1,1 +1,1 @@
-export { addScore, setGameover, setActualMole } from './actions'
+export { addScore, setGameover, setActualMole } from './actions';

@@ -1,22 +1,24 @@
-import * as actions from './actionTypes'
+import { ADD_SCORE, SET_GAMEOVER, SET_ACTUALMOLE } from './actionTypes'
 
 export const addScore = () => {
     return {
-        type: actions.ADD_SCORE
+        type: ADD_SCORE
     }
 }
 
 export const setGameover = () => {
     console.log('Set Game Over')
     return {
-        type: actions.SET_GAMEOVER
+        type: SET_GAMEOVER
     }
 }
 
 export const setActualMole = (mole) => {
     console.log('set Actual Mole ',mole)
+    let myMole = mole;
+
     return {
-        type: actions.SET_ACTUALMOLE,
-        payload: mole
+        type: SET_ACTUALMOLE,
+        payload: myMole
     }
 }

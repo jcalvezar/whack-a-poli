@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Button } from 'react-native';
 import Square from './Square'
-import { setActualMole, setGameover } from '../redux'
+//import { setActualMole, setGameover, addScore } from '../redux'
 import { connect } from 'react-redux'
 
 const GameBoard = (props) => {
@@ -10,20 +10,21 @@ const GameBoard = (props) => {
     const timer = () => { 
         setTimeLeft(timeLeft -1);
         const mole = Math.floor(Math.random() * 12);
-        //console.log(mole)
-        console.log('Actual Mole: ',props.actualMole)
-        console.log('Game Over: ',props.isGameOver)
-        setActualMole(mole);
+     
+        props.setActualMole(mole);
+        console.log('AFTER Actual Mole: ',props.actualMole);
+        //props.addScore();
     }
 
     const items = []
     for(let i=0;i<12;i++) {
         items.push(<Square key={i.toString()} jkey={i}/>);
+        
     }
 
     useEffect( () => {
         if (timeLeft <= 0) {
-            setGameover();
+            props.setGameover();
             return;
         }
         const id = setInterval(timer, 1000);
@@ -33,15 +34,14 @@ const GameBoard = (props) => {
 
     return (
         <ImageBackground
-            source={require('../assets/whacka/fondo2.png')}
+            source={require('../assets/whacka/fondo.png')}
             style={styles.container}
         >
             <Text style={{ fontSize: 30, marginTop: 30 }}>Whack A Politic</Text>
             <Text style={{ fontSize: 20, }}>Time Left: {timeLeft}</Text>
             <Text style={{ fontSize: 20, }}>Score: {props.score}</Text>
-            <Text style={{ fontSize: 20, }}>Actual Mole: {props.actualMole}</Text>
             <View style={styles.game}>
-                {items}
+                { props.isGameOver ? items : <Button title="Restart"/> }
             </View>
         </ImageBackground>
     )
@@ -72,8 +72,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setGameover: () => dispatch(setGameover()),
-        setActualMole: (mole) => dispatch(setActualMole(mole))
+        setGameover: () => dispatch({type: 'SET_GAMEOVER'}),
+        setActualMole: (mole) => dispatch({type: 'SET_ACTUALMOLE', payload: mole}),
+        addScore: () => dispatch({type: 'ADD_SCORE'})
     }
 }
 
