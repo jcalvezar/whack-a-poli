@@ -44,7 +44,7 @@ const GameBoard = (props) => {
             source={require('../assets/whacka/fondo.png')}
             style={styles.container}
         >
-            <Text style={{ fontSize: 30, marginTop: 30 }}>Whack A Politic</Text>
+            <Text style={{ fontSize: 30, marginTop: 30 }}>Kris & Mau</Text>
             <Text style={{ fontSize: 20, }}>Time Left: {timeLeft}</Text>
             <Text style={{ fontSize: 20, }}>Score: {props.score}</Text>
             <View style={styles.game}>

@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 
 const initState = {
-    maxTime: 10,
+    maxTime: 30,
     isGameOver: false,
     actualMole: 0,
     score: 0
