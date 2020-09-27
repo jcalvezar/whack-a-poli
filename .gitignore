@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 jca/
+jca3.sh
 
 # macOS
 .DS_Store
